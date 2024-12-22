@@ -5,28 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="683759b6-3f85-4e41-bcb6-ab9f5c58ec89" name="Changes" comment="chore: 스켈레톤 코드 작성">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/ConcertApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/business/ConcertService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/ConcertRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Concert.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Genre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Region.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/ConcertController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/dto/ConcertCreateRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/dto/ConcertListResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/dto/ConcertResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/dto/SuccessResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/java-concert/src/test/java/org/example/javaconcert/concert/business/ConcertServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Region.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Region.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/ConcertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/ConcertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/dto/ConcertCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/dto/ConcertCreateRequest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,6 +252,17 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="chore: 스켈레톤 코드 작성" />
     <option name="LAST_COMMIT_MESSAGE" value="chore: 스켈레톤 코드 작성" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/presentation/dto/ConcertCreateRequest.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

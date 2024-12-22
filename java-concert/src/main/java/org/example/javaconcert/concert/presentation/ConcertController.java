@@ -20,7 +20,6 @@ public class ConcertController {
 
     @PostMapping("/concert")
     public SuccessResponse<Long> saveConcert(@RequestBody ConcertCreateRequest concertCreateRequest) {
-        System.out.println("concertCreateRequest = " + concertCreateRequest);
         Long concertId = concertService.saveConcert(concertCreateRequest.toDomain());
 
         return SuccessResponse.withData("성공적으로 콘서트를 생성했습니다.", concertId);

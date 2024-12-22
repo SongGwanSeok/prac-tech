@@ -5,8 +5,14 @@ import org.example.javaconcert.concert.infrastructure.entity.Concert;
 import org.example.javaconcert.concert.infrastructure.entity.Genre;
 import org.example.javaconcert.concert.infrastructure.entity.Region;
 
-public record ConcertCreateRequest(String title, Genre genre, Region region, String place, LocalDateTime startTime,
-                                   LocalDateTime endTime) {
+public record ConcertCreateRequest(
+    String title,
+    Genre genre,
+    Region region,
+    String place,
+    LocalDateTime startTime,
+    LocalDateTime endTime
+) {
 
     public Concert toDomain() {
         return Concert.builder()

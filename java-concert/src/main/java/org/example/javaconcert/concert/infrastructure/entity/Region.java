@@ -16,8 +16,4 @@ public enum Region {
     Region(String name) {
         this.name = name;
     }
-
-    public static Region of(String name) {
-        return Region.valueOf(name);
-    }
 }

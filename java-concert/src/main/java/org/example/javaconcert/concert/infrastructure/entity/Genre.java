@@ -21,8 +21,4 @@ public enum Genre {
     Genre(String name) {
         this.name = name;
     }
-
-    public static Genre of(String name) {
-        return Genre.valueOf(name);
-    }
 }
