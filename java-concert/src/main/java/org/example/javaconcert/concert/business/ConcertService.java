@@ -29,4 +29,10 @@ public class ConcertService {
 
         return new ConcertListResponse(concerts);
     }
+
+    @Transactional(readOnly = true)
+    public Concert getConcertById(Long concertId) {
+        return concertRepository.findById(concertId)
+            .orElseThrow(() -> new IllegalArgumentException("콘서트가 존재하지 않습니다."));
+    }
 }

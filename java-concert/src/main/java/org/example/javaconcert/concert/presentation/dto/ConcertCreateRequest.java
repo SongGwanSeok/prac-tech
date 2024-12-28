@@ -11,10 +11,11 @@ public record ConcertCreateRequest(
     Region region,
     String place,
     LocalDateTime startTime,
-    LocalDateTime endTime
+    LocalDateTime endTime,
+    int totalTicketCount
 ) {
 
-    public Concert toDomain() {
+    public Concert toConcert() {
         return Concert.builder()
             .title(title)
             .genre(genre)
@@ -22,6 +23,7 @@ public record ConcertCreateRequest(
             .place(place)
             .startTime(startTime)
             .endTime(endTime)
+            .totalTicketCount(totalTicketCount)
             .build();
     }
 }

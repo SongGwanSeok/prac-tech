@@ -28,18 +28,28 @@ public class Concert {
     private String place;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private int totalTicketCount;
 
     public Concert() {
     }
 
     @Builder
     public Concert(String title, Genre genre, Region region, String place, LocalDateTime startTime,
-        LocalDateTime endTime) {
+        LocalDateTime endTime, int totalTicketCount) {
         this.title = title;
         this.genre = genre;
         this.region = region;
         this.place = place;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.totalTicketCount = totalTicketCount;
+    }
+
+    public boolean isFullReserved() {
+        return this.totalTicketCount <= 0;
+    }
+
+    public void decreaseTicketCount() {
+        this.totalTicketCount--;
     }
 }
