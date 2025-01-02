@@ -45,11 +45,10 @@ public class Concert {
         this.totalTicketCount = totalTicketCount;
     }
 
-    public boolean isFullReserved() {
-        return this.totalTicketCount <= 0;
-    }
-
     public void decreaseTicketCount() {
+        if (totalTicketCount <= 0) {
+            throw new IllegalArgumentException("콘서트 티켓이 부족합니다.");
+        }
         this.totalTicketCount--;
     }
 }

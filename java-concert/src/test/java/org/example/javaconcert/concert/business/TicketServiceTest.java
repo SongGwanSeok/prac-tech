@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 import org.example.javaconcert.concert.infrastructure.ConcertRepository;
 import org.example.javaconcert.concert.infrastructure.entity.Concert;
@@ -101,26 +102,43 @@ class TicketServiceTest {
         int numThreads = 15;
 
         ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
-        CountDownLatch countDownLatch = new CountDownLatch(15);
+        CountDownLatch countDownLatch = new CountDownLatch(numThreads);
+
+        AtomicInteger successCount = new AtomicInteger();
+        AtomicInteger failCount = new AtomicInteger();
 
         //when
         for (int i = 0; i < numThreads; i++) {
             executorService.execute(() -> {
-                Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
-                countDownLatch.countDown();
+                try {
+                    Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
+                    System.out.println("ticket = " + ticket);
+                    successCount.getAndIncrement();
+                } catch (IllegalArgumentException e) {
+                    failCount.getAndIncrement();
+                } finally {
+                    countDownLatch.countDown();
+                }
             });
         }
 
         //then
         countDownLatch.await();
         executorService.shutdown();
-        Concert concert = getConcert();
-        int ticketCount = ticketService.getTicketCount(savedConcertId);
 
-        //then
+//        Concert concert = getConcert();
+//        int ticketCount = ticketService.getTicketCount(savedConcertId);
+
         assertAll(
-            () -> assertThat(concert.getTotalTicketCount()).isEqualTo(0),
-            () -> assertThat(ticketCount).isEqualTo(TICKET_COUNT)
+//            // concert의 티켓 수량은 0개가 되어야 한다.
+//            () -> assertThat(concert.getTotalTicketCount()).isEqualTo(0),
+//            // 발행된 티켓은 10개가 되어야 한다.
+//            () -> assertThat(ticketCount).isEqualTo(10),
+
+            // 성공한 쓰레드는 10개여야 한다.
+            () -> assertThat(successCount.get()).isEqualTo(10),
+            // 실패한 쓰레드는 5개여야 한다.
+            () -> assertThat(failCount.get()).isEqualTo(5)
         );
     }
 

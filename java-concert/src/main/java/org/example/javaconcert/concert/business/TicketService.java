@@ -20,15 +20,10 @@ public class TicketService {
     }
 
     @Transactional
-    public Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
+    public synchronized Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
         Concert concert = concertService.getConcertById(concertReserveRequest.concertId());
-
-//        System.out.println("before = " + concert.getTotalTicketCount());
-        if (concert.isFullReserved()) {
-            throw new IllegalArgumentException("콘서트 티켓이 부족합니다.");
-        }
+        System.out.println("concert = " + concert);
         concert.decreaseTicketCount();
-//        System.out.println("after = " + concert.getTotalTicketCount());
         return ticketRepository.save(concertReserveRequest.toTicket(concert));
     }
 
