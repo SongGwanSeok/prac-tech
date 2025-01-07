@@ -1,6 +1,5 @@
 package org.example.javaconcert.concert.business;
 
-import java.util.List;
 import org.example.javaconcert.concert.infrastructure.TicketRepository;
 import org.example.javaconcert.concert.infrastructure.entity.Concert;
 import org.example.javaconcert.concert.infrastructure.entity.Ticket;
@@ -20,10 +19,13 @@ public class TicketService {
     }
 
     @Transactional
-    public synchronized Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
+    public Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
         Concert concert = concertService.getConcertById(concertReserveRequest.concertId());
-        System.out.println("concert = " + concert);
-        concert.decreaseTicketCount();
+        int reservedTicketCount = getTicketCount(concertReserveRequest.concertId());
+        System.out.println("reservedTicketCount = " + reservedTicketCount);
+        if (!concert.canReserve(reservedTicketCount)) {
+            throw new IllegalArgumentException("콘서트 티켓 수량이 부족합니다");
+        }
         return ticketRepository.save(concertReserveRequest.toTicket(concert));
     }
 
@@ -35,9 +37,6 @@ public class TicketService {
 
     @Transactional(readOnly = true)
     public Integer getTicketCount(Long concertId) {
-        Concert concert = concertService.getConcertById(concertId);
-        List<Ticket> allByConcert = ticketRepository.findAllByConcert(concert);
-
-        return allByConcert.size();
+        return ticketRepository.countByConcertIdForShare(concertId);
     }
 }

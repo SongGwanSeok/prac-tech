@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
-import org.example.javaconcert.concert.infrastructure.ConcertRepository;
+import org.example.javaconcert.concert.DbCleaner;
 import org.example.javaconcert.concert.infrastructure.entity.Concert;
 import org.example.javaconcert.concert.infrastructure.entity.Genre;
 import org.example.javaconcert.concert.infrastructure.entity.Region;
@@ -27,15 +27,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 class TicketServiceTest {
 
     @Autowired
-    private ConcertRepository concertRepository;
+    private DbCleaner dbCleaner;
+
     @Autowired
     private TicketService ticketService;
 
-    private static final int TICKET_COUNT = 10;
-    private Long savedConcertId;
+    @Autowired
+    private ConcertService concertService;
+
+    private static final int TICKET_COUNT = 100;
 
     @BeforeEach
     void setUp() {
+        dbCleaner.clean();
+
         Concert concert = Concert.builder()
             .title("다비치 콘서트")
             .genre(Genre.BALLADE)
@@ -46,22 +51,19 @@ class TicketServiceTest {
             .totalTicketCount(TICKET_COUNT)
             .build();
 
-        Concert savedConcert = concertRepository.save(concert);
-        savedConcertId = savedConcert.getId();
+        concertService.saveConcert(concert);
+        System.out.println("================ setUp ================ ");
     }
 
     @Test
     @DisplayName("티켓 예매 테스트")
     void givenConcertWhenReserveTicketThenReturnTicket() {
         //given
-        ConcertReserveRequest concertReserveRequest = new ConcertReserveRequest(savedConcertId, "송관석", "980902");
+        ConcertReserveRequest concertReserveRequest = new ConcertReserveRequest(1L, "송관석", "980902");
 
         //when
         //then
-        Ticket reservedTicket = assertDoesNotThrow(() -> ticketService.reserveTicket(concertReserveRequest));
-        Concert concert = reservedTicket.getConcert();
-
-        assertThat(concert.getTotalTicketCount()).isEqualTo(9);
+        assertDoesNotThrow(() -> ticketService.reserveTicket(concertReserveRequest));
     }
 
     @Test
@@ -81,34 +83,32 @@ class TicketServiceTest {
     @DisplayName("티켓 예매 테스트 - 티켓 수량 초과")
     void givenEmptyTicketCountConcertWhenReserveMoreTicketThenThrowIllegalArgumentException() {
         //given
-        ConcertReserveRequest concertReserveRequest = new ConcertReserveRequest(savedConcertId, "송관석", "980902");
+        ConcertReserveRequest concertReserveRequest = new ConcertReserveRequest(1L, "송관석", "980902");
         IntStream.range(0, TICKET_COUNT).forEach(i -> ticketService.reserveTicket(concertReserveRequest));
 
         //when
         Concert concert = getConcert();
 
         //then
-        assertThat(concert.getTotalTicketCount()).isEqualTo(0);
         assertThatThrownBy(() -> ticketService.reserveTicket(concertReserveRequest))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("콘서트 티켓이 부족합니다.");
+            .hasMessage("콘서트 티켓 수량이 부족합니다");
     }
 
     @Test
     @DisplayName("15명이 동시에 티켓 예매")
     void givenConcertWhenReserveTicketAtTheSameTimeThenThrowIllegalArgumentException() throws InterruptedException {
         //given
-        ConcertReserveRequest concertReserveRequest = new ConcertReserveRequest(savedConcertId, "송관석", "980902");
-        int numThreads = 15;
+        ConcertReserveRequest concertReserveRequest = new ConcertReserveRequest(1L, "송관석", "980902");
 
-        ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
-        CountDownLatch countDownLatch = new CountDownLatch(numThreads);
+        ExecutorService executorService = Executors.newFixedThreadPool(100);
+        CountDownLatch countDownLatch = new CountDownLatch(100);
 
         AtomicInteger successCount = new AtomicInteger();
         AtomicInteger failCount = new AtomicInteger();
 
         //when
-        for (int i = 0; i < numThreads; i++) {
+        for (int i = 0; i < 10000; i++) {
             executorService.execute(() -> {
                 try {
                     Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
@@ -126,24 +126,16 @@ class TicketServiceTest {
         countDownLatch.await();
         executorService.shutdown();
 
-//        Concert concert = getConcert();
-//        int ticketCount = ticketService.getTicketCount(savedConcertId);
+        int ticketCount = ticketService.getTicketCount(1L);
 
         assertAll(
-//            // concert의 티켓 수량은 0개가 되어야 한다.
-//            () -> assertThat(concert.getTotalTicketCount()).isEqualTo(0),
-//            // 발행된 티켓은 10개가 되어야 한다.
-//            () -> assertThat(ticketCount).isEqualTo(10),
-
-            // 성공한 쓰레드는 10개여야 한다.
-            () -> assertThat(successCount.get()).isEqualTo(10),
-            // 실패한 쓰레드는 5개여야 한다.
-            () -> assertThat(failCount.get()).isEqualTo(5)
+            () -> assertThat(ticketCount).as("티켓 수량 예상 실패").isEqualTo(100),
+            () -> assertThat(successCount.get()).as("쓰레드 성공 개수 예상 실패").isEqualTo(100),
+            () -> assertThat(failCount.get()).as("쓰레드 실패 개수 예상 실패").isEqualTo(9900)
         );
     }
 
     private Concert getConcert() {
-        return concertRepository.findById(savedConcertId)
-            .orElseThrow(() -> new IllegalArgumentException("[테스트] 콘서트를 가져올 수 없습니다."));
+        return concertService.getConcertById(1L);
     }
 }
