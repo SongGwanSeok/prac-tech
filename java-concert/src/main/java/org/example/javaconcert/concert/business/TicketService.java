@@ -1,5 +1,7 @@
 package org.example.javaconcert.concert.business;
 
+import lombok.RequiredArgsConstructor;
+import org.example.javaconcert.concert.business.aop.NamedLock;
 import org.example.javaconcert.concert.infrastructure.TicketRepository;
 import org.example.javaconcert.concert.infrastructure.entity.Concert;
 import org.example.javaconcert.concert.infrastructure.entity.Ticket;
@@ -8,16 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class TicketService {
 
     private final TicketRepository ticketRepository;
     private final ConcertService concertService;
 
-    public TicketService(TicketRepository ticketRepository, ConcertService concertService) {
-        this.ticketRepository = ticketRepository;
-        this.concertService = concertService;
-    }
-
+    @NamedLock(value = "reserveTicket")
     @Transactional
     public synchronized Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
         Concert concert = concertService.getConcertById(concertReserveRequest.concertId());

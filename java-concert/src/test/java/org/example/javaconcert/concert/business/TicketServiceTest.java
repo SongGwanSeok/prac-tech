@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 import org.example.javaconcert.concert.DbCleaner;
-import org.example.javaconcert.concert.infrastructure.LockRepository;
 import org.example.javaconcert.concert.infrastructure.entity.Concert;
 import org.example.javaconcert.concert.infrastructure.entity.Genre;
 import org.example.javaconcert.concert.infrastructure.entity.Region;
@@ -37,9 +36,6 @@ class TicketServiceTest {
 
     @Autowired
     private ConcertService concertService;
-
-    @Autowired
-    private LockRepository lockRepository;
 
     private static final int TICKET_COUNT = 100;
 
@@ -117,15 +113,8 @@ class TicketServiceTest {
         for (int i = 0; i < 10000; i++) {
             executorService.execute(() -> {
                 try {
-                    try {
-                        lockRepository.getLock("reserveTicket");
-                        Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
-                        System.out.println("ticket = " + ticket);
-                    } catch (Exception e) {
-                        throw new IllegalArgumentException(e.getMessage());
-                    } finally {
-                        lockRepository.releaseLock("reserveTicket");
-                    }
+                    Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
+                    System.out.println("ticket = " + ticket);
                     successCount.getAndIncrement();
                 } catch (IllegalArgumentException e) {
                     failCount.getAndIncrement();
