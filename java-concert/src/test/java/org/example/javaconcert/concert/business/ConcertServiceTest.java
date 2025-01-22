@@ -23,6 +23,7 @@ class ConcertServiceTest {
 
     @Test
     void saveConcert() {
+        //given
         concertService.saveConcert(Concert.builder()
             .title("다비치 콘서트")
             .genre(Genre.BALLADE)
@@ -33,8 +34,10 @@ class ConcertServiceTest {
             .totalTicketCount(10)
             .build());
 
+        //when
         ConcertListResponse allConcerts = concertService.getAllConcerts();
 
+        //then
         assertThat(allConcerts.getCount()).isEqualTo(1);
     }
 

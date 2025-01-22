@@ -6,12 +6,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
-@Entity
 @Getter
+@Entity
 public class Concert {
 
     @Id
@@ -29,6 +30,9 @@ public class Concert {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int totalTicketCount;
+
+    @Version
+    private Integer version;
 
     public Concert() {
     }

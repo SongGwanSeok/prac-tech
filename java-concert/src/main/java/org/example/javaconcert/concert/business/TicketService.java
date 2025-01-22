@@ -19,10 +19,9 @@ public class TicketService {
     }
 
     @Transactional
-    public Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
+    public synchronized Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
         Concert concert = concertService.getConcertById(concertReserveRequest.concertId());
-        int reservedTicketCount = getTicketCount(concertReserveRequest.concertId());
-        System.out.println("reservedTicketCount = " + reservedTicketCount);
+        int reservedTicketCount = getTicketCount(concert.getId());
         if (!concert.canReserve(reservedTicketCount)) {
             throw new IllegalArgumentException("콘서트 티켓 수량이 부족합니다");
         }
@@ -35,8 +34,8 @@ public class TicketService {
             .orElseThrow(() -> new IllegalArgumentException("티켓 코드에 해당하는 티켓이 존재하지 않습니다."));
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Integer getTicketCount(Long concertId) {
-        return ticketRepository.countByConcertIdForShare(concertId);
+        return ticketRepository.findAllByConcertId(concertId).size();
     }
 }

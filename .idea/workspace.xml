@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="683759b6-3f85-4e41-bcb6-ab9f5c58ec89" name="Changes" comment="feat: 콘서트 티켓 예매 테스트 - 동시 예매 실패">
-      <change afterPath="$PROJECT_DIR$/java-concert/src/test/java/org/example/javaconcert/concert/DbCleaner.java" afterDir="false" />
+    <list default="true" id="683759b6-3f85-4e41-bcb6-ab9f5c58ec89" name="Changes" comment="feat: 콘서트 티켓 예매 테스트 - DB Cleaner 사용">
+      <change afterPath="$PROJECT_DIR$/java-concert/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-concert/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/business/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/business/TicketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/ConcertRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/ConcertRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/TicketRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/TicketRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Concert.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/infrastructure/entity/Concert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-concert/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-concert/src/main/resources/application.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/java-concert/src/test/java/org/example/javaconcert/concert/business/TicketServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-concert/src/test/java/org/example/javaconcert/concert/business/TicketServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,35 +29,44 @@
         <task path="$PROJECT_DIR$/concert">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/java-concert">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="concert" type="f1a62948:ProjectNode" />
+                <item name="java-concert" type="f1a62948:ProjectNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="concert" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="concert" type="f1a62948:ProjectNode" />
+                <item name="java-concert" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="concert" type="f1a62948:ProjectNode" />
+                <item name="java-concert" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
                 <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="concert" type="f1a62948:ProjectNode" />
+                <item name="java-concert" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
-                <item name="org.springframework.boot:spring-boot-starter-web:3.4.0" type="b3323d55:ExternalSystemViewDefaultContributor$DependencyExternalSystemNode" />
+                <item name="runtimeClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java-concert" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="testCompileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="java-concert" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="testRuntimeClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
               </path>
             </expand>
             <select />
@@ -115,7 +123,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle./Users/gwanseok/Documents/prac/prac-tech/java-concert [dependencies].executor": "Run",
     "Gradle.Build concert.executor": "Run",
+    "Gradle.Load Gradle Dependencies.executor": "Run",
     "JUnit.All in java-concert.test (1).executor": "Run",
     "JUnit.All in java-concert.test (2).executor": "Run",
     "JUnit.All in java-concert.test (3).executor": "Run",
@@ -125,6 +135,8 @@
     "JUnit.ConcertServiceTest.getConcert.executor": "Run",
     "JUnit.ConcertServiceTest.givenConcertWhenSaveThenReturnConcertId.executor": "Run",
     "JUnit.ConcertServiceTest.saveConcert.executor": "Run",
+    "JUnit.Item6Test.executor": "Run",
+    "JUnit.Item6Test2.executor": "Run",
     "JUnit.TicketServiceTest.executor": "Run",
     "JUnit.TicketServiceTest.given.executor": "Run",
     "JUnit.TicketServiceTest.givenConcertWhenNotFoundConcertThenThrowIllegalArgumentException.executor": "Run",
@@ -176,7 +188,59 @@
       <recent name="org.example.javaconcert.concert.presentation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TicketServiceTest.givenConcertWhenReserveTicketAtTheSameTimeThenThrowIllegalArgumentException">
+  <component name="RunManager" selected="JUnit.TicketServiceTest">
+    <configuration name="/Users/gwanseok/Documents/prac/prac-tech/java-concert [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/java-concert" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dependencies" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Item6Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-concert.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.javaconcert.concert.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.javaconcert.concert" />
+      <option name="MAIN_CLASS_NAME" value="org.example.javaconcert.concert.Item6Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Item6Test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-concert.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.javaconcert.concert.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.javaconcert.concert" />
+      <option name="MAIN_CLASS_NAME" value="org.example.javaconcert.concert.Item6Test2" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TicketServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-concert.test" />
       <extension name="coverage">
@@ -188,22 +252,6 @@
       <option name="PACKAGE_NAME" value="org.example.javaconcert.concert.business" />
       <option name="MAIN_CLASS_NAME" value="org.example.javaconcert.concert.business.TicketServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TicketServiceTest.givenConcertWhenNotFoundConcertThenThrowIllegalArgumentException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="java-concert.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.javaconcert.concert.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.javaconcert.concert.business" />
-      <option name="MAIN_CLASS_NAME" value="org.example.javaconcert.concert.business.TicketServiceTest" />
-      <option name="METHOD_NAME" value="givenConcertWhenNotFoundConcertThenThrowIllegalArgumentException" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -224,38 +272,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketServiceTest.givenConcertWhenReserveTicketThenReturnTicket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="java-concert.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.javaconcert.concert.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.javaconcert.concert.business" />
-      <option name="MAIN_CLASS_NAME" value="org.example.javaconcert.concert.business.TicketServiceTest" />
-      <option name="METHOD_NAME" value="givenConcertWhenReserveTicketThenReturnTicket" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TicketServiceTest.givenEmptyTicketCountConcertWhenReserveMoreTicketThenThrowIllegalArgumentException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="java-concert.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.javaconcert.concert.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.javaconcert.concert.business" />
-      <option name="MAIN_CLASS_NAME" value="org.example.javaconcert.concert.business.TicketServiceTest" />
-      <option name="METHOD_NAME" value="givenEmptyTicketCountConcertWhenReserveMoreTicketThenThrowIllegalArgumentException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ConcertApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="concert.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="prac.concert.ConcertApplication" />
@@ -265,11 +281,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TicketServiceTest.givenConcertWhenReserveTicketAtTheSameTimeThenThrowIllegalArgumentException" />
         <item itemvalue="JUnit.TicketServiceTest" />
-        <item itemvalue="JUnit.TicketServiceTest.givenEmptyTicketCountConcertWhenReserveMoreTicketThenThrowIllegalArgumentException" />
-        <item itemvalue="JUnit.TicketServiceTest.givenConcertWhenNotFoundConcertThenThrowIllegalArgumentException" />
-        <item itemvalue="JUnit.TicketServiceTest.givenConcertWhenReserveTicketThenReturnTicket" />
+        <item itemvalue="JUnit.TicketServiceTest.givenConcertWhenReserveTicketAtTheSameTimeThenThrowIllegalArgumentException" />
+        <item itemvalue="Gradle./Users/gwanseok/Documents/prac/prac-tech/java-concert [dependencies]" />
+        <item itemvalue="JUnit.Item6Test2" />
+        <item itemvalue="JUnit.Item6Test" />
       </list>
     </recent_temporary>
   </component>
@@ -295,7 +311,9 @@
       <workItem from="1735193455287" duration="1378000" />
       <workItem from="1735194840208" duration="1000" />
       <workItem from="1735194850706" duration="35210000" />
-      <workItem from="1735562870219" duration="28232000" />
+      <workItem from="1735562870219" duration="49573000" />
+      <workItem from="1736836440458" duration="7065000" />
+      <workItem from="1736844688488" duration="1128000" />
     </task>
     <task id="LOCAL-00001" summary="chore: 스켈레톤 코드 작성">
       <option name="closed" value="true" />
@@ -321,7 +339,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735806754380</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: 콘서트 티켓 예매 테스트 - DB Cleaner 사용">
+      <option name="closed" value="true" />
+      <created>1736252715912</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1736252715912</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +368,8 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="chore: 스켈레톤 코드 작성" />
     <MESSAGE value="feat: 콘서트 티켓 예매 테스트 - 동시 예매 실패" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 콘서트 티켓 예매 테스트 - 동시 예매 실패" />
+    <MESSAGE value="feat: 콘서트 티켓 예매 테스트 - DB Cleaner 사용" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 콘서트 티켓 예매 테스트 - DB Cleaner 사용" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -357,10 +384,10 @@
           <line>42</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/java-concert/src/main/java/org/example/javaconcert/concert/business/TicketService.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="53" />
+          <line>24</line>
+          <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

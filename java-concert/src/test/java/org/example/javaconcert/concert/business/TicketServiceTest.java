@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 import org.example.javaconcert.concert.DbCleaner;
+import org.example.javaconcert.concert.infrastructure.LockRepository;
 import org.example.javaconcert.concert.infrastructure.entity.Concert;
 import org.example.javaconcert.concert.infrastructure.entity.Genre;
 import org.example.javaconcert.concert.infrastructure.entity.Region;
@@ -22,8 +23,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class TicketServiceTest {
 
     @Autowired
@@ -34,6 +37,9 @@ class TicketServiceTest {
 
     @Autowired
     private ConcertService concertService;
+
+    @Autowired
+    private LockRepository lockRepository;
 
     private static final int TICKET_COUNT = 100;
 
@@ -96,13 +102,13 @@ class TicketServiceTest {
     }
 
     @Test
-    @DisplayName("15명이 동시에 티켓 예매")
+    @DisplayName("10000명이 동시에 티켓 예매")
     void givenConcertWhenReserveTicketAtTheSameTimeThenThrowIllegalArgumentException() throws InterruptedException {
         //given
         ConcertReserveRequest concertReserveRequest = new ConcertReserveRequest(1L, "송관석", "980902");
 
         ExecutorService executorService = Executors.newFixedThreadPool(100);
-        CountDownLatch countDownLatch = new CountDownLatch(100);
+        CountDownLatch countDownLatch = new CountDownLatch(10000);
 
         AtomicInteger successCount = new AtomicInteger();
         AtomicInteger failCount = new AtomicInteger();
@@ -111,8 +117,15 @@ class TicketServiceTest {
         for (int i = 0; i < 10000; i++) {
             executorService.execute(() -> {
                 try {
-                    Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
-                    System.out.println("ticket = " + ticket);
+                    try {
+                        lockRepository.getLock("reserveTicket");
+                        Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
+                        System.out.println("ticket = " + ticket);
+                    } catch (Exception e) {
+                        throw new IllegalArgumentException(e.getMessage());
+                    } finally {
+                        lockRepository.releaseLock("reserveTicket");
+                    }
                     successCount.getAndIncrement();
                 } catch (IllegalArgumentException e) {
                     failCount.getAndIncrement();
