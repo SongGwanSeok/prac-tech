@@ -41,7 +41,7 @@ class TicketServiceTest {
 
     @BeforeEach
     void setUp() {
-        dbCleaner.clean();
+//        dbCleaner.clean();
 
         Concert concert = Concert.builder()
             .title("다비치 콘서트")

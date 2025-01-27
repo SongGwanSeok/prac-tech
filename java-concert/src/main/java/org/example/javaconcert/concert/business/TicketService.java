@@ -1,7 +1,6 @@
 package org.example.javaconcert.concert.business;
 
 import lombok.RequiredArgsConstructor;
-import org.example.javaconcert.concert.business.aop.NamedLock;
 import org.example.javaconcert.concert.infrastructure.TicketRepository;
 import org.example.javaconcert.concert.infrastructure.entity.Concert;
 import org.example.javaconcert.concert.infrastructure.entity.Ticket;
@@ -16,9 +15,8 @@ public class TicketService {
     private final TicketRepository ticketRepository;
     private final ConcertService concertService;
 
-    @NamedLock(value = "reserveTicket")
     @Transactional
-    public synchronized Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
+    public Ticket reserveTicket(ConcertReserveRequest concertReserveRequest) {
         Concert concert = concertService.getConcertById(concertReserveRequest.concertId());
         int reservedTicketCount = getTicketCount(concert.getId());
         if (!concert.canReserve(reservedTicketCount)) {

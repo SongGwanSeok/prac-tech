@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Order(1)
 @Component
 @RequiredArgsConstructor
-public class LockAspect {
+public class NamedLockAop {
 
     private final LockService lockService;
 
@@ -22,7 +22,7 @@ public class LockAspect {
         boolean isLockAcquired = lockService.getLock(lockKey);
 
         if (!isLockAcquired) {
-            throw new IllegalStateException("Unable to acquire lock: " + lockKey);
+            throw new IllegalStateException("락 획득에 실패했습니다 락: " + lockKey);
         }
 
         try {

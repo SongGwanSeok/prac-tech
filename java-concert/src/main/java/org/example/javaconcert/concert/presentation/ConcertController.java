@@ -2,7 +2,6 @@ package org.example.javaconcert.concert.presentation;
 
 import org.example.javaconcert.concert.business.ConcertService;
 import org.example.javaconcert.concert.business.TicketService;
-import org.example.javaconcert.concert.infrastructure.entity.Ticket;
 import org.example.javaconcert.concert.presentation.dto.ConcertCreateRequest;
 import org.example.javaconcert.concert.presentation.dto.ConcertListResponse;
 import org.example.javaconcert.concert.presentation.dto.ConcertReserveRequest;
@@ -38,9 +37,9 @@ public class ConcertController {
     }
 
     @PostMapping("/concert/reservation")
-    public SuccessResponse<Ticket> reserveConcert(@RequestBody ConcertReserveRequest concertReserveRequest) {
-        Ticket ticket = ticketService.reserveTicket(concertReserveRequest);
+    public SuccessResponse<Void> reserveConcert(@RequestBody ConcertReserveRequest concertReserveRequest) {
+        ticketService.reserveTicket(concertReserveRequest);
 
-        return SuccessResponse.withData("성공적으로 티켓 예약에 성공했습니다.", ticket);
+        return SuccessResponse.withoutData("성공적으로 티켓 예약에 성공했습니다.");
     }
 }
